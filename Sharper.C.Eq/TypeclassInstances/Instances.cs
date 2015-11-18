@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Sharper.C.Data.Eq
+namespace Sharper.C.TypeclassInstances
 {
 
-using Lang.Typeclass;
-using static EqModule;
+using static Data.EqModule;
 
-[TypeclassInstance]
 public struct EqInt
   : Eq<int>
 {
@@ -17,7 +15,6 @@ public struct EqInt
         x == y;
 }
 
-[TypeclassInstance]
 public struct EqUint
   : Eq<uint>
 {
@@ -26,7 +23,6 @@ public struct EqUint
         x == y;
 }
 
-[TypeclassInstance]
 public struct EqLong
   : Eq<long>
 {
@@ -36,7 +32,6 @@ public struct EqLong
 
 }
 
-[TypeclassInstance]
 public struct EqByte
   : Eq<byte>
 {
@@ -45,7 +40,6 @@ public struct EqByte
         x == y;
 }
 
-[TypeclassInstance]
 public struct EqChar
   : Eq<char>
 {
@@ -54,7 +48,6 @@ public struct EqChar
         x == y;
 }
 
-[TypeclassInstance]
 public struct EqBool
   : Eq<bool>
 {
@@ -63,7 +56,6 @@ public struct EqBool
         x == y;
 }
 
-[TypeclassInstance]
 public struct EqString
   : Eq<string>
 {
@@ -72,7 +64,6 @@ public struct EqString
         x == y;
 }
 
-[TypeclassInstance]
 public sealed class EqEnumerable<A>
   : Eq<IEnumerable<A>>
 {
@@ -88,7 +79,6 @@ public sealed class EqEnumerable<A>
         x.SequenceEqual(y, EqA.EqualityComparer());
 }
 
-[TypeclassInstance]
 public sealed class EqTuple<A, B>
   : Eq<Tuple<A, B>>
 {
