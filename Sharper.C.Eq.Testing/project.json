@@ -1,0 +1,15 @@
+{ "version": "0.1.0-*"
+, "description": "Properties and Arbitrary instances for Sharper.C.Eq"
+, "authors": [ "Jeremy Hughes" ]
+, "projectUrl": "https://github.com/sharper-library/Sharper.C.Eq"
+, "licenseUrl": "https://raw.githubusercontent.com/sharper-library/Sharper.C.Eq/master/LICENSE.txt"
+
+, "dependencies":
+  { "Sharper.C.Eq": ""
+  , "Sharper.C.Testing": "0.1.0-*"
+  }
+
+, "frameworks":
+  { "dnx451": { }
+  }
+}

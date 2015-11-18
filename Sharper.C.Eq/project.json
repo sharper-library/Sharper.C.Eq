@@ -1,0 +1,21 @@
+{ "version": "0.1.0-*"
+, "description": "Equality type class and System instances"
+, "authors": [ "Jeremy Hughes" ]
+, "projectUrl": "https://github.com/sharper-library/Sharper.C.Eq"
+, "licenseUrl": "https://raw.githubusercontent.com/sharper-library/Sharper.C.Eq/master/LICENSE.txt"
+
+, "dependencies":
+  { "Sharper.C.Lang.Typeclass": "0.1.0-*"
+  }
+
+, "frameworks":
+  { "dotnet":
+    { "dependencies":
+      { "System.Runtime": "4.0.20"
+      , "System.Linq": "4.0.0"
+      }
+    }
+  , "dnx451": { }
+  , "net451": { }
+  }
+}
