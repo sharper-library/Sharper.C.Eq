@@ -12,7 +12,7 @@ public static class EqTestingModule
     public static Test EqLaws<A>(Eq<A> eqA, Arbitrary<A> arbA)
     =>
         "Eq Laws"
-        .Group
+        .All
           ( IsEquivalence(eqA.Equal, arbA)
           );
 }
