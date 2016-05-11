@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sharper.C.Data;
 
 namespace Sharper.C.TypeclassInstances
 {
-
-using static Data.EqModule;
 
 public struct EqInt
   : Eq<int>
@@ -66,7 +65,7 @@ public sealed class EqEnumerable<A>
     }
 
     public bool Equal(IEnumerable<A> x, IEnumerable<A> y)
-    =>  x.SequenceEqual(y, EqA.EqualityComparer());
+    =>  x.SequenceEqual(y, EqA.ToEqualityComparer());
 }
 
 public sealed class EqTuple<A, B>
