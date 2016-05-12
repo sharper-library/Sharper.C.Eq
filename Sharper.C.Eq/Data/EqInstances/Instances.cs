@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sharper.C.Data;
 
-namespace Sharper.C.TypeclassInstances
+namespace Sharper.C.Data.EqInstances
 {
 
 public struct EqInt
@@ -55,34 +54,23 @@ public struct EqString
     =>  x == y;
 }
 
-public sealed class EqEnumerable<A>
+public struct EqEnumerable<A, AEq>
   : Eq<IEnumerable<A>>
+  where AEq : Eq<A>
 {
-    public Eq<A> EqA { get; }
-
-    public EqEnumerable(Eq<A> eqA)
-    {   EqA = eqA;
-    }
-
     public bool Equal(IEnumerable<A> x, IEnumerable<A> y)
-    =>  x.SequenceEqual(y, EqA.ToEqualityComparer());
+    =>  x.SequenceEqual(y, default(AEq).ToEqualityComparer());
 }
 
-public sealed class EqTuple<A, B>
+public struct EqTuple<A, AEq, B, BEq>
   : Eq<Tuple<A, B>>
+  where AEq : Eq<A>
+  where BEq : Eq<B>
 {
-    public Eq<A> EqA { get; }
-    public Eq<B> EqB { get; }
-
-    public EqTuple(Eq<A> eqA, Eq<B> eqB)
-    {   EqA = eqA;
-        EqB = eqB;
-    }
-
     public bool Equal(Tuple<A, B> x, Tuple<A, B> y)
-    =>  EqA.Equal(x.Item1, y.Item1)
+    =>  default(AEq).Equal(x.Item1, y.Item1)
         &&
-        EqB.Equal(x.Item2, y.Item2);
+        default(BEq).Equal(x.Item2, y.Item2);
 }
 
 }
