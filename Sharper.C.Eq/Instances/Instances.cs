@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sharper.C.Data;
 
-namespace Sharper.C.Data.EqInstances
+namespace Sharper.C.Instances
 {
 
     public struct EqInt
