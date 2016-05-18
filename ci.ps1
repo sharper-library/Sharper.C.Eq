@@ -24,14 +24,13 @@ function CleanCmd() {
     if (Test-Path artifacts) {Remove-Item -Recurse artifacts}
 }
 
-function RestoreCmd() {
-    dnu restore
+function EnsureDnvm() {
+    $sdk = GlobalSdk 'global.json'
+    dnvm install -Alias ci_build $sdk.version -r $sdk.runtime -arch $sdk.architecture
 }
 
 function InstallCmd() {
-    $sdk = GlobalSdk 'global.json'
-    dnvm install -Alias ci_build $sdk.version -r $sdk.runtime -arch $sdk.architecture
-    dnu restore
+    dnvm exec ci_build dnu restore
 }
 
 function BuildCmd() {
@@ -51,13 +50,15 @@ function TestCmd() {
 }
 
 function RegisterCmd() {
-    Get-ChildItem -Recurse *.nupkg | %{dnu packages add $_}
+    PackageProjects | %{
+        Get-ChildItem -Recurse *.nupkg | %{dnvm exec ci_build dnu packages add $_}
+    }
 }
 
 function RunCommand($name) {
+    EnsureDnvm
     switch ($name) {
         clean {CleanCmd}
-        restore {RestoreCmd}
         install {InstallCmd}
         build {BuildCmd}
         test {TestCmd}
