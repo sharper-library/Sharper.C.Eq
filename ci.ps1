@@ -30,7 +30,7 @@ function RestoreCmd() {
 
 function InstallCmd() {
     $sdk = GlobalSdk 'global.json'
-    dnvm install $sdk.version -r $sdk.runtime -arch $sdk.architecture
+    dnvm install -Alias ci_build $sdk.version -r $sdk.runtime -arch $sdk.architecture
     dnu restore
 }
 
@@ -41,11 +41,11 @@ function BuildCmd() {
     else {
       $env:DNX_BUILD_VERSION = 'z'
     }
-    dnu pack --configuration Release (PackageProjects)
+    dnvm exec ci_build dnu pack --configuration Release (PackageProjects)
 }
 
 function TestCmd() {
-    $codes = (TestProjects) | %{dnx -p $_ test | Write-Host; $LASTEXITCODE}
+    $codes = (TestProjects) | %{dnvm run ci_build -p $_ test | Write-Host; $LASTEXITCODE}
     $code = ($codes | Measure-Object -Sum).Sum
     exit $code
 }
